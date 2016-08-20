@@ -24,17 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('frontend.pages.index');
     }
 
     public function siir()
     {
-        return view('frontend.layouts.app');
+        return view('frontend.pages.index');
     }
 
-    public function admin()
-    {
-        return view('backend.layouts.app');
-    }
+    
 
 }

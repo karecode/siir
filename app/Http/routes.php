@@ -11,12 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
-Route::get('/siir', 'HomeController@siir');
-Route::get('/admin', 'HomeController@admin');
+Route::get('/', 'HomeController@index');
+
+
+Route::group(['prefix' => 'admin', 'middleware' => 'web'], function () {
+    /*
+     * dashboard
+     */
+    Route::get('/', 'Admin\AdminController@index');
+    Route::get('/dashboard', 'Admin\AdminController@index');
+    /*
+     * Şiir
+     */
+    Route::get('/siir/siir-ekle', 'Admin\AdminController@siir_ekle');
+    Route::post('/ckeditor/upload', ['as' => 'ckeditor.upload', 'uses' => 'Admin\AdminController@ckeupload']);
+
+});
+
